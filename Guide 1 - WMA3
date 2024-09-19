@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP to USD Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic.js"></script>
+</head>
+<body>
+    <ion-app>
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>PHP to USD Converter</ion-title>
+            </ion-toolbar>
+        </ion-header>
+    
+        <ion-content class="ion-padding">
+            <ion-item>
+                <ion-label position="floating">Amount in PHP</ion-label>
+                <ion-input type="number" id="amountPHP" placeholder="Enter amount"></ion-input>
+            </ion-item>
+            
+            <ion-button expand="full" onclick="convertCurrency()">Convert to USD</ion-button>
+    
+            <ion-card>
+                <ion-card-content>
+                    <ion-card-title>Converted Amount</ion-card-title>
+                    <p id="convertedAmount">$0.00 USD</p>
+                </ion-card-content>
+            </ion-card>
+        </ion-content>
+    </ion-app>
+    
+    <script>
+        function convertCurrency() {
+            const amountPHP = document.getElementById('amountPHP').value;
+            const conversionRate = 0.018;
+            const amountUSD = (amountPHP * conversionRate).toFixed(2);
+            document.getElementById('convertedAmount').innerText = `$${amountUSD} USD`;
+        }
+    </script>
+    
+</body>
+</html>
