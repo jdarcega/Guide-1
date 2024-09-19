@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+  
+<ion-app>
+    <!-- Header -->
+    <ion-header>
+        <ion-toolbar color="warning">
+            <ion-title>Fare Meter</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <!-- Content -->
+    <ion-content>
+       
+        <ion-item>
+            <!-- <ion-label position="floating"><ion-icon name="add-outline"></ion-icon> Enter Number 1:</ion-label><br> -->
+            <ion-input 
+            id="distance"
+            label="Distance:"
+            label-placement="floating"  
+            type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <!-- <ion-label position="floating"><ion-icon name="add-outline"></ion-icon> Enter Number 1:</ion-label><br> -->
+            <ion-input 
+            id="rate"
+            label="Enter the Rate:"
+            label-placement="floating"  
+            type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <!-- <ion-label position="floating"><ion-icon name="add-outline"></ion-icon> Enter Number 1:</ion-label><br> -->
+            <ion-input 
+            id="tax"
+            label="Enter the Tax:"
+            label-placement="floating"  
+            type="number"></ion-input>
+        </ion-item>
+
+        
+        <!-- Button -->
+        <ion-button expand="block" onclick="triggerMode()" color="tertiary">PROCESS OPERATION <ion-icon name="checkmark-circle-outline"></ion-icon></ion-button>
+        <!-- Result -->
+        <ion-item>
+            <ion-label>The Result is:
+               
+                <ion-text id="res"></ion-text><br><br>
+            
+<script>
+    function triggerMode() {
+const distance = parseFloat(document.getElementById('distance').value)
+const rate = parseFloat(document.getElementById('rate').value)
+const tax = parseFloat(document.getElementById('tax').value)
+
+let Fare = distance * rate
+let Amount = (tax/100) * Fare
+let Result = Fare + Amount
+document.getElementById('res').textContent = Result
+}
+</script>
+</body>
+</html>
