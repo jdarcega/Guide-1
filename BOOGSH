@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery Form</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Food Delivery Form</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+        <form id="form">
+            <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input placeholder="Enter your Name" id="name" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Product Name</ion-label>
+                <ion-input placeholder="Enter your Product" id="prod_name" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Product Price</ion-label>
+                <ion-input type="number" placeholder="Enter your price" id="prod_price" required></ion-input>
+            </ion-item>
+        </form>
+
+        <ion-list>
+            <ion-item>
+                <ion-select label="Discounted?" id="discounted">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="no">No</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item id="disContent" style="display:none;">
+                <ion-input id="disc" placeholder="Enter Voucher Code"></ion-input>
+            </ion-item>
+        </ion-list>
+    
+        <ion-button expand="block" onclick="submit()">Submit Order</ion-button>
+        
+        <div>
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-title>Display Result</ion-card-title>
+                </ion-card-header>
+                <ion-card-content id="res"></ion-card-content>
+            </ion-card>
+        </div>
+    </ion-content>
+
+    <script>
+        document.getElementById("discounted").addEventListener("ionChange", myFunction);
+        
+        function myFunction() {
+            let discounted = document.getElementById("discounted").value;
+            let disContent = document.getElementById("disContent");
+            if (discounted == "yes") {
+                disContent.style.display = "block";
+            } else {
+                disContent.style.display = "none";
+            }
+        }
+
+        function submit() {
+            const discounted = document.getElementById('discounted').value;
+            const name = document.getElementById('name').value;
+            const prod_name = document.getElementById('prod_name').value;
+            const prod_price = parseFloat(document.getElementById('prod_price').value);
+            const disc = document.getElementById('disc').value;
+            const discountCode = 'CRYSTAL10'; // valid discount code
+            const percentage = 0.1; // 10% discount
+
+            let total;
+            
+            if (discounted == "yes") {
+                if (disc === discountCode) {
+                    const discountAmount = prod_price * percentage; // Calculate discount amount
+                    total = prod_price - discountAmount; // Calculate total after discount
+                    document.getElementById('res').innerHTML = "Name: " + name;
+                    document.getElementById('res').innerHTML += "<br>Product Name: " + prod_name;
+                    document.getElementById('res').innerHTML += "<br>Product Price: $" + prod_price.toFixed(2);
+                    document.getElementById('res').innerHTML += "<br>Your Voucher is Valid!";
+                    document.getElementById('res').innerHTML += "<br>Discount Amount: $" + discountAmount.toFixed(2);
+                    document.getElementById('res').innerHTML += "<br>Total Cost: $" + total.toFixed(2);
+                } else {
+                    total = prod_price; // No discount applied
+                    document.getElementById('res').innerHTML = "Name: " + name;
+                    document.getElementById('res').innerHTML += "<br>Product Name: " + prod_name;
+                    document.getElementById('res').innerHTML += "<br>Product Price: $" + prod_price.toFixed(2);
+                    document.getElementById('res').innerHTML += "<br>Your Voucher is Invalid!";
+                    document.getElementById('res').innerHTML += "<br>Total Cost: $" + total.toFixed(2);
+                }
+            } else {
+                total = prod_price; // No discount applied
+                document.getElementById('res').innerHTML = "Name: " + name;
+                document.getElementById('res').innerHTML += "<br>Product Name: " + prod_name;
+                document.getElementById('res').innerHTML += "<br>Product Price: $" + prod_price.toFixed(2);
+                document.getElementById('res').innerHTML += "<br>Total Cost: $" + total.toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>
